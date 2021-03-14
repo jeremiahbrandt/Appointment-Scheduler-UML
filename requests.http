@@ -1,0 +1,127 @@
+POST https://example.com/customer/
+content-type: application/json
+
+{
+    "firstName": "John",
+    "lastName": "Doe",
+    "emailAddress": "john.doe@example.com"
+}
+
+###
+
+GET https://example.com
+
+HTTP/1.1 400 Bad Request
+
+{
+    "customerId": 1
+}
+
+### Modify account
+PUT https://example.com/customer/
+Authorization: bearer xxx
+content-type: application/json
+
+{
+    "customerId": 1,
+    "firstName": "Johnny",
+    "emailAddress": "johnny.doe@example.com"
+}
+
+### Lookup Professional
+GET https://example.com/professional/lookup
+Authorization: bearer xxx
+content-type: application/json
+
+{
+    "professionalCode": 200
+}
+
+# Reponse
+
+{
+    "firstName": "Elon",
+    "lastName": "Musk",
+    "schedule": [
+        {
+            "timeSlotId": 3000,
+            "date": 20210224,
+            "startTime": 0800,
+            "endTime": 0845
+        },
+        {
+            "timeSlotId": 3001,
+            "date": 20210224,
+            "startTime": 0900,
+            "endTime": 0945
+        },
+        {
+             "timeSlotId": 3002,
+            "date": 20210324,
+            "startTime": 0800,
+            "endTime": 0845
+        },
+        {
+            "timeSlotId": 3003,
+            "date": 20210324,
+            "startTime": 0900,
+            "endTime": 0945
+        },
+        {
+             "timeSlotId": 3004,
+            "date": 20210324,
+            "startTime": 1000,
+            "endTime": 1045
+        },
+    ]
+}
+
+### Schedule An Appointment
+POST https://example.com/calendar/
+Authorization: bearer xxx
+content-type: application/json
+
+{
+    "professional": 
+    {
+        "professionalId": "200",
+        "firstName": "Elon",
+        "lastName": "Musk",
+    },
+    "timeSlot": 
+    {
+        "timeSlotId": 3003,
+        "date": 20210324,
+        "startTime": 0900,
+        "endTime": 0945
+    },
+    "name": "Telsa Report",
+    "description": "Discuss Telsa futures and business strategy"
+}
+
+### View All Scheduled Appointments
+GET https://example.com/calendar/
+Authorization: bearer xxx
+content-type: application/json
+
+{
+    "customerId": 1
+}
+
+### Cancel An Appointment
+DELETE https://example.com/calendar/
+Authorization: bearer xxx
+content-type: application/json
+
+{
+    "appointmentId": 40001
+}
+
+### Add Favorite Professional
+POST https://example.com/professional/
+Authorization: bearer xxx
+content-type: application/json
+
+{
+    "professionalId": 3000
+}
